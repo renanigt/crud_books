@@ -17,10 +17,24 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'Pessoa was successfully saved.' }
+        format.html { redirect_to @book, notice: 'Book was successfully saved.' }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    @book = Book.find(params[:id])
+    
+    respond_to do |format|
+      if @book.update(book_params)
+        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        format.json { render :show, status: :ok, location: @book }
+      else
+        format.html { render :edit }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
