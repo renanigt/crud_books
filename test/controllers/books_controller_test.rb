@@ -14,13 +14,16 @@ class BooksControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
-    assert_not_nil assigns(:book)
+  end
+
+  test "should get edit" do
+    get :edit, id: @book.id
+    assert_response :success
   end
 
   test "should show book" do
     get :show, id: @book.id
     assert_response :success
-    assert_not_nil assigns(:book)
   end
 
   test "shold create new book" do
