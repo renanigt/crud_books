@@ -17,12 +17,24 @@ class BooksControllerTest < ActionController::TestCase
     assert_not_nil assigns(:book)
   end
 
-  test "shold create a new book" do
+  test "should show book" do
+    get :show, id: @book.id
+    assert_response :success
+    assert_not_nil assigns(:book)
+  end
+
+  test "shold create new book" do
     assert_difference('Book.count') do
       post :create, book: { title: "JavaScript Book", 
         resume: "Resume of JavaScript book", author: "Jane Doe", 
         status: "read", category: "technology" }
     end
+  end
+
+  test "should update a book" do
+    put :update, id: @book.id, book: { title: "New Title" }
+    @book.reload
+    assert_equal "New Title", @book.title
   end
 
 end
