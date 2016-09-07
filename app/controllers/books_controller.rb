@@ -1,11 +1,11 @@
 class BooksController < ApplicationController
+  before_action :set_book, only: [:show, :edit, :update]
 
   def index
     @books = Book.all
   end
 
   def show
-    @book = Book.find(params[:id])
   end
 
   def new
@@ -13,7 +13,6 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @book = Book.find(params[:id])
   end
 
   def create
@@ -31,8 +30,6 @@ class BooksController < ApplicationController
   end
 
   def update
-    @book = Book.find(params[:id])
-    
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
@@ -45,6 +42,10 @@ class BooksController < ApplicationController
   end
 
   private
+    def set_book
+      @book = Book.find(params[:id])
+    end
+
     def book_params
       params.require(:book).permit(:title, :resume, :author, :status, :category)
     end
