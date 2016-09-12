@@ -40,4 +40,10 @@ class BooksControllerTest < ActionController::TestCase
     assert_equal "New Title", @book.title
   end
 
+  test "should destroy a book" do
+    assert_difference('Book.count', -1) do
+      delete :destroy, id: @book.id
+    end
+  end
+
 end
