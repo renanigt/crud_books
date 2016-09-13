@@ -1,3 +1,5 @@
 == README
 
 A CRUD of books using Ruby on Rails.
+
+The automated tests are written using MiniTest.
